@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+#box {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    /* box-shadow: 3px 3px 12px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 3px 3px 12px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 3px 12px 0px rgba(0, 0, 0, 0.75); */
+    border-radius: 25px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* <select> styles */
+select {
+    /* Reset */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    outline: 0;
+    font: inherit;
+    /* Personalize */
+    width: 20em;
+    height: 3em;
+    padding: 0 4em 0 1em;
+    background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg)
+            no-repeat right 0.8em center/1.4em,
+        linear-gradient(
+            to left,
+            rgba(255, 255, 255, 0.3) 3em,
+            rgba(255, 255, 255, 0.2) 3em
+        );
+    color: black;
+    border-radius: 0.25em;
+    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    /* <option> colors */
+    /* Remove focus outline */
+    /* Remove IE arrow */
+    margin-bottom: 1rem;
+}
+select option {
+    color: inherit;
+}
+select:focus {
+    outline: none;
+}
+select::-ms-expand {
+    display: none;
+}
+/* button {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+} */
+.attendance-btn {
+    background-color: #2b642d;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.attendance-btn:hover {
+    background-color: #4caf50;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+}
+.arrow {
+    margin-left: 50px; 
+}
+label{
+    padding-right: 10px;
+    font-weight: bold;
+}
