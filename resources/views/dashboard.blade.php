@@ -27,23 +27,6 @@
     <!-- Font Awesome-->
     @includeIf('attendance.partials.css')
 </head>
-{{-- <style>
-    body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-    }
-
-    .page-body {
-        flex-grow: 1;
-    }
-
-    .footer {
-        background-color: #333; /* Set the background color you want */
-        color: #fff; /* Set the text color you want */
-        padding: 15px;
-    }
-</style> --}}
 <body>
     <!-- Loader starts-->
     <div class="loader-wrapper">
