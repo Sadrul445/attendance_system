@@ -10,15 +10,6 @@
                     <div class="login-card">
                         <form method="POST" action="{{ route('login') }}" class="theme-form login-form">
                             @csrf
-                            <div class="form-group">
-
-                                <div class="d-flex justify-content-center">
-                                    <a href="#"><img class="img-fluid"
-                                            src="{{ asset('assets/images/login/admin.jpg') }}" alt=""
-                                            style="max-width: 80px"></a>
-                                </div>
-                                <h4 class="text-center">Admin Panel</h4>
-                            </div>
                             <h5 class="pt-4">Login</h5>
                             <h6>Welcome back! Log in to your account.</h6>
 
@@ -85,7 +76,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <p>Don't have account?<a class="ms-2 text-neocon" href="{{-- {{ route('register') }} --}}">Create
+                            <p>Don't have account?<a class="ms-2 text-neocon" href="{{ route('register') }}">Create
                                     Account</a></p>
                         </form>
                     </div>

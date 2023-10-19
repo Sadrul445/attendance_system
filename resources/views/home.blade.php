@@ -15,8 +15,25 @@
                 Welcome to the Attendance System
             </h2>
             <div>
-                <a href="{{route('attendance.in')}}" type="submit" class="attendance-btn">Attendance &rarr;</a>
-                <a href="{{route('login')}}" type="submit" class="attendance-btn">Admin Login &rarr;</a>
+                @if (Route::has('login'))
+                    <div>
+                        @auth
+                        @if (auth()->user()->role === 'employee')
+                            <a href="{{ url('/employee/dashboard') }}"  type="submit" class="attendance-btn">Employee Dashboard</a>
+                        @else
+                        <a href="{{ url('/dashboard') }}"  type="submit" class="attendance-btn">Admin Dashboard</a>                         
+                        @endif
+                        @else
+                            <a href="{{ route('login') }}"  type="submit" class="attendance-btn">Log in</a>
+    
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}"  type="submit" class="attendance-btn">Register</a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
+                {{-- <a href="{{route('attendance.in')}}" type="submit" class="attendance-btn">Attendance &rarr;</a> --}}
+                {{-- <a href="{{route('login')}}" type="submit" class="attendance-btn">Login &rarr;</a> --}}
             </div>
         </div>
     </div>

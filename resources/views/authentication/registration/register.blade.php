@@ -14,17 +14,6 @@
                             @csrf
                             <h4>Create your account</h4>
                             <h6>Enter your personal details to create account</h6>
-                            <!-- User Name -->
-                            <div class="form-group">
-                                <x-input-label for="username" :value="__('User Name')" />
-                                <div class="small-group">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="icon-user"></i></span>
-                                        <x-text-input id="username" class="form-control" type="text" name="username"
-                                            :value="old('username')" required autofocus autocomplete="username" />
-                                    </div>
-                                </div>
-                            </div>
                             <!-- Name -->
                             <div class="form-group">
                                 <x-input-label for="name" :value="__('Name')" />

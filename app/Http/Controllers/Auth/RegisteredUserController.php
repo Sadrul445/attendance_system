@@ -21,6 +21,7 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
         return view('authentication.registration.register');
+        // return view('auth.register');
     }
 
     /**
@@ -42,10 +43,21 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $user->update(['role' => $request->role]); // Assuming there's a 'role' field in your registration form.
+
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+         // Redirect the user based on their role
+         if ($user->role === 'admin') {
+            return redirect(RouteServiceProvider::ADMIN_HOME);
+        } elseif ($user->role === 'employee') {
+            return redirect(RouteServiceProvider::EMPLOYEE_HOME);
+        } else {
+            // Add a default route for other roles (if needed)
+            return redirect('/');
+        }
     }
+
 }
