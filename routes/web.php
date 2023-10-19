@@ -23,14 +23,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/in', [AttendanceController::class, 'showLoginPage'])->name('attendance.in');
-Route::post('/in', [AttendanceController::class, 'submitLogin']);
-Route::get('/out', [AttendanceController::class, 'showLogoutPage'])->name('attendance.out');
-Route::post('/out', [AttendanceController::class, 'submitLogout']);
-Route::get('/leave', [AttendanceController::class, 'showLeavePage'])->name('attendance.out');
-Route::post('/leave', [AttendanceController::class, 'submitLeave']);
-Route::get('/attendances', [AttendanceController::class, 'attendancesToday'])->name('attendance.attendances');
+// Route::get('/attendances', [AttendanceController::class, 'attendancesToday'])->name('attendance.attendances');
 Route::middleware('auth')->group(function () {
+    Route::get('/in', [AttendanceController::class, 'showLoginPage'])->name('attendance.in');
+    Route::post('/in', [AttendanceController::class, 'submitLogin']);
+    Route::get('/out', [AttendanceController::class, 'showLogoutPage'])->name('attendance.out');
+    Route::post('/out', [AttendanceController::class, 'submitLogout']);
+    Route::get('/leave', [AttendanceController::class, 'showLeavePage'])->name('attendance.out');
+    Route::post('/leave', [AttendanceController::class, 'submitLeave'])->name('attendance.leave');;
     Route::get('/daily-attendances', [AttendanceController::class, 'attendancesToday'])->name('dashboard.daily-attendances');
 });
 

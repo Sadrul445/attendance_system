@@ -121,6 +121,6 @@ class AttendanceController extends Controller
             }
             array_push($rows, $row);
         }
-        return view('attendance.attendances')->with('rows', $rows);
+        return view('dashboard.daily-attendances')->with('rows', $rows);
     }
 }

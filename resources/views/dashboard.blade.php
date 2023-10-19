@@ -38,13 +38,11 @@
     <!-- page-wrapper Start-->
     <div class="page-wrapper compact-wrapper" id="pageWrapper">
         <!-- Page Header Start-->
-        <div class="page-main-header">
-            <!-- Page Header Start-->
-            @includeIf('attendance.partials.header')
-        </div>
+        @includeIf('attendance.partials.header')
+        
         <div class="page-body-wrapper sidebar-icon">
             @includeIf('attendance.partials.sidebar')
-        </div>
+
         <div class="page-body">
             <!-- Container-fluid starts-->
             @yield('content')
