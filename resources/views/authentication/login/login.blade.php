@@ -1,5 +1,13 @@
 @extends('authentication.login.master')
 @push('css')
+<style>
+    .i-color{
+        color:#0DB14B;
+    }
+    .reg-color{
+        color:#0089D0;
+    }
+</style>
 @endpush
 @section('title', 'Login-Admin Panel')
 @section('content')
@@ -8,7 +16,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="login-card">
-                        <form method="POST" action="{{ route('login') }}" class="theme-form login-form">
+                        <form method="POST" action="{{ route('login') }}" class="theme-form login-form shadow rounded-3">
                             @csrf
                             <h5 class="pt-4">Login</h5>
                             <h6>Welcome back! Log in to your account.</h6>
@@ -17,7 +25,7 @@
                             <div class="form-group">
                                 <x-input-label for="email" :value="__('Email')" />
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="icon-email"></i></span>
+                                    <span class="input-group-text"><i class="icon-email i-color"></i></span>
                                     <x-text-input class="form-control" type="email" name="email" required autofocus
                                         autocomplete="username" :value="old('email')" />
                                     @error('email')
@@ -29,7 +37,7 @@
                             <div class="form-group">
                                 <x-input-label for="password" :value="__('Password')" />
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                                    <span class="input-group-text"><i class="icon-lock i-color"></i></span>
                                     <x-text-input class="form-control" type="password" name="password" required
                                         autocomplete="current-password" id="password" />
 
@@ -46,7 +54,7 @@
                                     <input id="checkbox1" type="checkbox" />
                                     <label for="checkbox1">Remember password</label>
                                 </div>
-                                <a class="link text-neocon" href="#">Forgot password?</a>
+                                <a class="link text-secondary" href="#forget_password">Forgot password?</a>
                             </div>
                             <div class="form-group">
                                 <x-primary-button class="btn btn-success btn-block">
@@ -59,24 +67,24 @@
                             <div class="form-group">
                                 <ul class="login-social">
                                     <li>
-                                        <a href="https://www.linkedin.com/login" target="_blank"><i
+                                        <a href="https://www.linkedin.com/login" target="_blank"><i class="i-color"
                                                 data-feather="linkedin"></i></a>
                                     </li>
                                     <li>
-                                        <a href="https://www.linkedin.com/login" target="_blank"><i
+                                        <a href="https://www.linkedin.com/login" target="_blank"><i class="i-color"
                                                 data-feather="twitter"></i></a>
                                     </li>
                                     <li>
-                                        <a href="https://www.linkedin.com/login" target="_blank"><i
+                                        <a href="https://www.linkedin.com/login" target="_blank"><i class="i-color"
                                                 data-feather="facebook"></i></a>
                                     </li>
                                     <li>
-                                        <a href="https://www.instagram.com/login" target="_blank"><i
+                                        <a href="https://www.instagram.com/login" target="_blank"><i class="i-color"
                                                 data-feather="instagram"> </i></a>
                                     </li>
                                 </ul>
                             </div>
-                            <p>Don't have account?<a class="ms-2 text-neocon" href="{{ route('register') }}">Create
+                            <p>Don't have account?<a class="ms-2 reg-color" href="{{ route('register') }}">Create
                                     Account</a></p>
                         </form>
                     </div>

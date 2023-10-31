@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->enum('type', ['login', 'logout', 'leave']);
-            $table->foreignId('employee_id')->constrained();
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->where('role', '=', 'employee'); // Add the where clause to restrict to 'employee' role
             $table->timestamps();
         });
     }

@@ -18,9 +18,6 @@ body {
     display: block;
     width: 100%;
     max-width: 600px;
-    /* box-shadow: 3px 3px 12px 0px rgba(0, 0, 0, 0.75);
-    -webkit-box-shadow: 3px 3px 12px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 3px 3px 12px 0px rgba(0, 0, 0, 0.75); */
     border-radius: 25px;
     padding: 20px;
     text-align: center;
@@ -50,9 +47,6 @@ select {
     border-radius: 0.25em;
     box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    /* <option> colors */
-    /* Remove focus outline */
-    /* Remove IE arrow */
     margin-bottom: 1rem;
 }
 select option {
@@ -64,8 +58,8 @@ select:focus {
 select::-ms-expand {
     display: none;
 }
-/* button {
-    background-color: #4caf50;
+.in-btn {
+    background-color: #0DB14B;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -76,9 +70,19 @@ select::-ms-expand {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 10px;
-} */
-.attendance-btn {
-    background-color: #2b642d;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+.in-btn:focus,
+.in-btn:active,
+.in-btn:hover {
+    color: #000000;
+    background-color: #0fd55b !important;
+    border-color: #0fd55b !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.out-btn {
+    background-color: #0089D0;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -92,9 +96,14 @@ select::-ms-expand {
     transition: background-color 0.2s, box-shadow 0.2s;
 }
 
-.attendance-btn:hover {
-    background-color: #4caf50;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+.out-btn:focus,
+.out-btn:active,
+.out-btn:hover {
+    color: #000000;
+    background-color: #63add2 !important;
+    border-color: #63add2 !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 .arrow {
     margin-left: 50px; 

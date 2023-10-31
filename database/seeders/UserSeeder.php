@@ -21,12 +21,12 @@ class UserSeeder extends Seeder
             'password' => Hash::make('lap#2023'),
             'role' => 'admin'
         ],
-        [
-            'name' => 'employee',
-            'email' => 'employee@lap.com',
-            'password' => Hash::make('lap#2023'),
-            'role' => 'employee'
-        ]
+        // [
+        //     'name' => 'employee',
+        //     'email' => 'employee@lap.com',
+        //     'password' => Hash::make('lap#2023'),
+        //     'role' => 'employee'
+        // ]
     );
     }
 }

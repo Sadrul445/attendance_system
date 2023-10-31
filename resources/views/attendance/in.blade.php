@@ -9,40 +9,28 @@
 </head>
 
 <body>
-    <div id="box">
-        <div id="alert-container">
-            @if (session()->has('alert'))
-                <div class="alert alert-danger">
-                    {{ session('alert') }}
-                </div>
-            @endif
-            @if (session()->has('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
+    <div class="card">
+        <div class="card-body shadow">
+            <div id="box">
+                <form action="{{ route('attendance.in') }}" method="POST">
+                    @csrf
+                    <div>
+                        <label for="employee_id">Employee:</label>
+                        <select name="user_id" id="user_id">
+                            <option value="">Select Employee</option>
+                            <option value="{{ $employee->id }}">
+                                <p>{{ $employee->name }}</p>
+                            </option>
+                        </select>
+                    </div>
+                        <button type="submit" class="in-btn mt-4 shadow">IN</button>
+                </form>
+            </div>
         </div>
-        <form action="{{route('attendance.in')}}" method="POST">
-            @csrf
-            <div>
-                <label for="employee_id">Employee:</label>
-                <select name="employee_id" id="employee_id">
-                    <option value="" >Select Employee</option>
-                    @foreach ($employees as $employee)
-                        <option value="{{ $employee->id }}"><p>{{ $employee->name }}</p></option>
-                    @endforeach
-                </select>
-            </div>
-            <div>
-                <button type="submit" class="attendance-btn mt-4">Login</button>
-            </div>
-            <div>
-                {{-- <a href="{{route('attendance.attendances')}}" class="attendance-btn mt-4" >Attendance List</a> --}}
-            </div>
-        </form>
     </div>
+
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
         if ($('#alert-container').length) {
@@ -53,6 +41,6 @@
             }, 1200);
         }
     });
-</script>
+</script> --}}
 
 </html>

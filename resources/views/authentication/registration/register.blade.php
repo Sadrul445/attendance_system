@@ -2,6 +2,11 @@
 
 @push('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/sweetalert2.css') }}">
+    <style>
+        .i-color{
+            color: #0089D0;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -10,7 +15,7 @@
             <div class="row m-0">
                 <div class="col-12 p-0">
                     <div class="login-card">
-                        <form action="{{ route('register') }}" method="POST" class="theme-form login-form">
+                        <form action="{{ route('register') }}" method="POST" class="theme-form login-form shadow rounded-3">
                             @csrf
                             <h4>Create your account</h4>
                             <h6>Enter your personal details to create account</h6>
@@ -19,7 +24,7 @@
                                 <x-input-label for="name" :value="__('Name')" />
                                 <div class="small-group">
                                     <div class="input-group">
-                                        <span class="input-group-text"><i class="icon-user"></i></span>
+                                        <span class="input-group-text"><i class="icon-user i-color"></i></span>
                                         <x-text-input id="name" class="form-control" type="text" name="name"
                                             :value="old('name')" required autofocus autocomplete="name" />
                                     </div>
@@ -30,7 +35,7 @@
                             <div class="form-group">
                                 <x-input-label for="email" :value="__('Email')" />
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="icon-email"></i></span>
+                                    <span class="input-group-text"><i class="icon-email i-color"></i></span>
 
                                     <x-text-input id="email" class="form-control" type="email" name="email"
                                         :value="old('email')" required autocomplete="username" />
@@ -41,7 +46,7 @@
                             <div class="form-group">
                                 <x-input-label for="password" :value="__('Password')" />
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                                    <span class="input-group-text"><i class="icon-lock i-color"></i></span>
 
                                     <x-text-input id="password" class="form-control" type="password" name="password"
                                         required autocomplete="new-password" />
@@ -53,7 +58,7 @@
                             <div class="form-group">
                                 <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                                    <span class="input-group-text"><i class="icon-lock i-color"></i></span>
 
                                     <x-text-input id="password_confirmation" class="form-control"
                                         type="password_confirmation" name="password_confirmation" required
@@ -80,24 +85,24 @@
                             <div class="form-group">
                                 <ul class="login-social">
                                     <li>
-                                        <a href="https://www.linkedin.com/login" target="_blank"><i
+                                        <a href="https://www.linkedin.com/login" target="_blank"><i class="i-color"
                                                 data-feather="linkedin"></i></a>
                                     </li>
                                     <li>
-                                        <a href="https://www.linkedin.com/login" target="_blank"><i
+                                        <a href="https://www.linkedin.com/login" target="_blank"><i class="i-color"
                                                 data-feather="twitter"></i></a>
                                     </li>
                                     <li>
-                                        <a href="https://www.linkedin.com/login" target="_blank"><i
+                                        <a href="https://www.linkedin.com/login" target="_blank"><i class="i-color"
                                                 data-feather="facebook"></i></a>
                                     </li>
                                     <li>
-                                        <a href="https://www.instagram.com/login" target="_blank"><i
+                                        <a href="https://www.instagram.com/login" target="_blank"><i class="i-color"
                                                 data-feather="instagram"> </i></a>
                                     </li>
                                 </ul>
                             </div>
-                            <p>Already have an account?<a class="ms-2" href="{{ route('login') }}">Sign in</a></p>
+                            <p>Already have an account?<a class="ms-2 text-success" href="{{ route('login') }}">Sign in</a></p>
                         </form>
                     </div>
                 </div>

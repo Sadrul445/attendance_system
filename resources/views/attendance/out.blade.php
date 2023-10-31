@@ -5,23 +5,24 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Logout Attendance</title>
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 </head>
 
 <body>
     <div id="box">
-        <form action="/out" method="POST">
+        <form action="{{ route('attendance.out') }}" method="POST">
             @csrf
             <div>
                 <label for="employee_id">Employee:</label>
-                <select name="employee_id" id="employee_id">
+                <select name="user_id" id="user_id">
                     <option value="">Select Employee</option>
-                    @foreach ($employees as $employee)
-                        <option value="{{ $employee->id }}">{{ $employee->name }}</option>
-                    @endforeach
+                    <option value="{{ $employee->id }}">
+                        {{ $employee->name }}
+                    </option>
                 </select>
             </div>
             <div>
-                <button type="submit">Logout</button>
+                <button type="submit" class="out-btn mt-4">OUT</button>
             </div>
         </form>
     </div>

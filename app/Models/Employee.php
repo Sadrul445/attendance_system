@@ -9,8 +9,8 @@ class Employee extends Model
 {
     use HasFactory;
 
-    public function attendances()
-    {
-        return $this->hasMany(Attendance::class);
-    }
+    // public function attendances()
+    // {
+    //     return $this->hasMany(Attendance::class);
+    // }
 }

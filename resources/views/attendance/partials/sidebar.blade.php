@@ -2,8 +2,7 @@
     <div class="sidebar-user text-center">
         <a class="setting-primary" href="javascript:void(0)"><i data-feather="settings"></i></a><img
             class="img-90 rounded-circle" src="{{ asset('assets/images/dashboard/1.png') }}" alt="" />
-        <div class="badge-bottom"><span class="badge " style="color: #FF6536;background:#262626">New</span></div>
-
+        <div class="badge-bottom"><span class="badge " style="color: #0DB14B;background:#ffffff">New</span></div>
         @if (Auth::check())
             <a href="#">
                 <h6 class="mt-3 f-14 f-w-600">{{ Auth::user()->name }}</h6>
@@ -37,11 +36,23 @@
                     {{-- <li class="sidebar-main-title">
                     </li> --}}
                     <li class="dropdown">
+                        <a class="nav-link menu-title " href="javascript:void(0)">
+                            <i data-feather="airplay"></i><span>Today Attendance</span>
+                        </a>
+                        <ul class="nav-submenu menu-content" style="display: none;">
+                            @if(auth()->user()->role === 'admin')
+                                <li><a href="{{ route('admin-dashboard.today-attendances') }}">Today Attendance</a></li>
+                            @elseif(auth()->user()->role === 'employee')
+                                <li><a href="{{ route('attendance.individual', ['employeeId' => auth()->user()->id]) }}">Today My Attendance</a></li>
+                            @endif
+                        </ul>
+                    </li>
+                    <li class="dropdown">
                         <a class="nav-link menu-title " href="javascript:void(0)"><i
                                 data-feather="airplay"></i><span>Daily Attendance</span></a>
                         <ul class="nav-submenu menu-content" style="display: none;">
-                            <li><a href="{{route('dashboard.daily-attendances')}}" class="#">Daily Attendance</a></li>
-                            {{-- <li><a href="#" class="#">List of Case Studies</a></li> --}}
+                            <li><a href="{{ route('admin-dashboard.daily-attendances') }}" class="#">Show Daily Attendance</a></li>
+                            {{-- <li><a href="#" class="#">List of Employee</a></li> --}}
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -51,7 +62,8 @@
                             <li><a href="#" class="#">Create Employee</a></li>
                             <li><a href="#" class="#">List of Employee</a></li>
                         </ul>
-
+                    </li>
+                  
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

@@ -27,15 +27,21 @@ Route::get('employee/dashboard', function () {
     return view('employee.dashboard');
 })->name('employee.dashboard');
 
-// Route::get('/attendances', [AttendanceController::class, 'attendancesToday'])->name('attendance.attendances');
 Route::middleware('auth')->group(function () {
-    Route::get('/in', [AttendanceController::class, 'showLoginPage'])->name('attendance.in');
-    Route::post('/in', [AttendanceController::class, 'submitLogin']);
-    Route::get('/out', [AttendanceController::class, 'showLogoutPage'])->name('attendance.out');
-    Route::post('/out', [AttendanceController::class, 'submitLogout']);
-    Route::get('/leave', [AttendanceController::class, 'showLeavePage'])->name('attendance.out');
-    Route::post('/leave', [AttendanceController::class, 'submitLeave'])->name('attendance.leave');;
-    Route::get('/daily-attendances', [AttendanceController::class, 'attendancesToday'])->name('dashboard.daily-attendances');
+    //in
+    Route::get('/show/in/{id}', [AttendanceController::class, 'showLoginPage'])->name('attendance.in');
+    Route::post('/in', [AttendanceController::class, 'submitLogin'])->name('attendance.in');
+    //out
+    Route::get('/show/out/{id}', [AttendanceController::class, 'showLogoutPage'])->name('attendance.out');
+    Route::post('/out', [AttendanceController::class, 'submitLogout'])->name('attendance.out');
+    //leave
+    Route::get('/show/leave/{id}', [AttendanceController::class, 'showLeavePage'])->name('attendance.leave');
+    Route::post('/leave', [AttendanceController::class, 'submitLeave'])->name('attendance.leave');
+    //individual employee
+    Route::get('/attendance/{employeeId}',[AttendanceController::class,'individualAttendance'])->name('attendance.individual');
+    //admin
+    Route::get('/today-attendances', [AttendanceController::class, 'attendancesToday'])->middleware(['auth', 'role:admin'])->name('admin-dashboard.today-attendances');
+    Route::get('/daily-attendances-report', [AttendanceController::class, 'dailyAttendanceReport'])->middleware(['auth', 'role:admin'])->name('admin-dashboard.daily-attendances');
 });
 
 //employee
