@@ -40,7 +40,8 @@
                             <tbody>
                                 <tr>
                                     <td>{{ $row->date_time }}</td>
-                                    <td>{{ $row->onLeave ? 'On Leave' : ($row->absent ? 'Absent' : 'Present') }}</td>
+                                    {{-- <td>{!! $row->onLeave ? 'On Leave' : ($row->absent ? 'Absent' : 'Present') !!}</td> --}}
+                                    <td>{!! $row->onLeave ? '<strong style="color: #ba895d;">' . 'On Leave' . '</strong>' : ($row->absent ? '<strong style="color: red;">' . 'Absent' . '</strong>' : '<strong style="color: #0DB14B;">' . 'Present' . '</strong>') !!}</td>
                                     <td>{{ $row->login_time }}</td>
                                     <td>{{ $row->logout_time }}</td>
                                     <td>{{ $row->working_time }}</td>
@@ -54,7 +55,7 @@
                 <div class="card shadow rounded-3">
                     <div class="card-body mt-2">
                         <h3>
-                            Profile
+                            <a href="#">Profile</a>
                         </h3>
                         <div>
                             <label for="">ID</label>
@@ -62,12 +63,21 @@
                         </div>
                         <div class="mt-4">
                             <div>
-                                <label for="">Name</label>
+                                <label for="name">Name</label>
                                 <p>{{ $employee->name }}</p>
                             </div>
                             <div class="mt-3">
-                                <label for="">Email</label>
+                                <label for="email">Email</label>
                                 <p>{{ $employee->email }}</p>
+                            </div>
+                            <div class="mt-3">
+                                <label for="phone">Phone Number</label>
+                                <p>+880-165444444</p>
+                            </div>
+                            <div class="mt-3">
+                                <label for="address">Address</label>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing 
+                                    elit. Nam, tenetur? Ducimus, itaque.</p>
                             </div>
                         </div>   
                     </div>

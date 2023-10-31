@@ -46,9 +46,7 @@
                                             @foreach ($records as $row)
                                                 <tr>
                                                     <th scope="row">{{ $row->name }}</th>
-                                                    <td class="text-capitalize">
-                                                        {{ $row->onLeave ? 'On Leave' : ($row->absent ? 'Absent' : 'Present') }}
-                                                    </td>
+                                                    <td>{!! $row->onLeave ? '<strong style="color: #ba895d;">' . 'On Leave' . '</strong>' : ($row->absent ? '<strong style="color: red;">' . 'Absent' . '</strong>' : '<strong style="color: #0DB14B;">' . 'Present' . '</strong>') !!}</td>
                                                     <td>{{ $row->login_time }}</td>
                                                     <td>{{ $row->logout_time }}</td>
                                                     <td>{{ $row->working_time }}</td>

@@ -1841,6 +1841,7 @@ a:hover {
   background-color: #0089D0 !important;
   border-color: #0089D0 !important;
 }
+
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
@@ -1851,6 +1852,13 @@ a:hover {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+
+
+
+
+
+
+
 
 .btn-secondary {
   background-color: #ba895d !important;

@@ -42,8 +42,8 @@
                                                 <td>{{ $row->date_time }}</td>
                                                 <td scope="row">{{ $row->name }}</td>
                                                 <td class="text-capitalize">
-                                                    {{ $row->onLeave == true ? 'On Leave' : ($row->absent == true ? 'Absent' : 'Present') }}
-                                                </td>
+                                                    {!! $row->onLeave == true ? '<strong style="color: #ba895d;">' . 'On Leave' . '</strong>' : ($row->absent == true ? '<strong style="color: red;">' . 'Absent' . '</strong>' : '<strong style="color: #0DB14B;">' . 'Present' . '</strong>') !!}
+                                                </td>                                         
                                                 <td>{{ $row->login_time }}</td>
                                                 <td>{{ $row->logout_time }}</td>
                                                 <td>{{ $row->working_time }}</td>
