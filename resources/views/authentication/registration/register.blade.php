@@ -6,9 +6,12 @@
         .i-color{
             color: #0089D0;
         }
+        .logo{
+            text-align: center;
+        }
     </style>
 @endpush
-
+@section('title', 'Registration')
 @section('content')
     <section>
         <div class="container-fluid p-0">
@@ -17,7 +20,11 @@
                     <div class="login-card">
                         <form action="{{ route('register') }}" method="POST" class="theme-form login-form shadow rounded-3">
                             @csrf
-                            <h4>Create your account</h4>
+                            <div class="logo mb-4">
+                                <img class="img-fluid" src="{{ asset('assets/images/lap-attendance/logo/Logo Black.png') }}"
+                                    alt="">
+                            </div>
+                            <h5>Create your account</h5>
                             <h6>Enter your personal details to create account</h6>
                             <!-- Name -->
                             <div class="form-group">
@@ -85,19 +92,19 @@
                             <div class="form-group">
                                 <ul class="login-social">
                                     <li>
-                                        <a href="https://www.linkedin.com/login" target="_blank"><i class="i-color"
+                                        <a href="#" target="_blank"><i class="i-color"
                                                 data-feather="linkedin"></i></a>
                                     </li>
                                     <li>
-                                        <a href="https://www.linkedin.com/login" target="_blank"><i class="i-color"
+                                        <a href="#" target="_blank"><i class="i-color"
                                                 data-feather="twitter"></i></a>
                                     </li>
                                     <li>
-                                        <a href="https://www.linkedin.com/login" target="_blank"><i class="i-color"
+                                        <a href="#" target="_blank"><i class="i-color"
                                                 data-feather="facebook"></i></a>
                                     </li>
                                     <li>
-                                        <a href="https://www.instagram.com/login" target="_blank"><i class="i-color"
+                                        <a href="#" target="_blank"><i class="i-color"
                                                 data-feather="instagram"> </i></a>
                                     </li>
                                 </ul>

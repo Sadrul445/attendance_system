@@ -12,7 +12,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
-    <title>Employee Dashboard @yield('title')</title>
+    <title>@yield('title')</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link

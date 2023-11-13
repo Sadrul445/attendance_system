@@ -19,16 +19,16 @@
                         alt="">
                 </div>
             </div>
-            <h2 class="my-4">
-                Welcome to the Attendance System
-            </h2>
+            <h3 class="my-4">
+                Welcome to the Attendance Management System <strong>- AMS</strong> 
+            </h3>
             <div>
                 @if (Route::has('login'))
                     <div>
                         @auth
                             @if (auth()->user()->role === 'employee')
                                 <a href="{{ url('/employee/dashboard') }}" type="submit"
-                                    class="btn btn-success px-4 rounded-3 shadow">Employee
+                                    class="btn btn-success px-4 rounded-3 shadow ">Employee
                                     Dashboard</a>
                             @else
                                 <a href="{{ url('/dashboard') }}" type="submit"

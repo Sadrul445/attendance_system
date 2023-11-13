@@ -15,7 +15,7 @@ class PasswordResetLinkController extends Controller
      */
     public function create(): View
     {
-        return view('auth.forgot-password');
+        return view('authentication.forgot-password');
     }
 
     /**
@@ -36,9 +36,14 @@ class PasswordResetLinkController extends Controller
             $request->only('email')
         );
 
-        return $status == Password::RESET_LINK_SENT
-                    ? back()->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
+        if ($status === Password::RESET_LINK_SENT) {
+            // Password reset link sent successfully, redirect the user to the home page.
+            return redirect()->route('login')->with('status', 'Password reset link sent successfully. Check your email.');
+        } else {
+            // Password reset link sending failed, redirect back with an error message.
+            return back()
+                ->withInput($request->only('email'))
+                ->withErrors(['email' => __($status)]);
+        }
     }
 }

@@ -11,53 +11,55 @@ use Carbon\Carbon;
 class AttendanceController extends Controller
 {
     /*
-        Login
+        In
     */
     // ShowLoginPage
     public function showLoginPage(Request $request, $id)
     {
         $employee = User::findOrFail($id);
-        return view('attendance.in', compact('employee'));
+        return view('employee.in', compact('employee'));
     }
     // SubmitLogin
     public function submitLogin(Request $request)
     {
-        $attendance = Attendance::where('created_at', '>', today())->where('email', $request->user_id)->where('type', 'login')->first();
+        $attendance = Attendance::where('created_at', '>', today())->where('user_id', $request->user_id)->where('type', 'login')->first();
         if (!$attendance) {
             $attendance = new Attendance();
         } else {
-            session()->flash('alert', 'You have already logged in today');
-            return redirect()->route('attendance.individual', ['employeeId' => $request->user_id]);
+            session()->flash('alert', 'You have already In today');
+            return redirect()->route('employee.individual', ['employeeId' => $request->user_id]);
         }
         $attendance->type = 'login';
         $attendance->user_id = $request->user_id;
         $attendance->save();
-        return redirect()->route('attendance.individual', ['employeeId' => $request->user_id]);
+        session()->flash('success', 'You are IN for today successfully !!!');
+        return redirect()->route('employee.individual', ['employeeId' => $request->user_id]);
     }
     /*
-        Logout
+        Out
     */
     // ShowLogoutPage
     public function showLogoutPage(Request $request, $id)
     {
         $employee = User::findOrFail($id);
-        return view('attendance.out', compact('employee'));
+        return view('employee.out', compact('employee'));
     }
     // SubmitLogout
     public function submitLogout(Request $request)
     {
 
-        $attendance = Attendance::where('created_at', '>', today())->where('email', $request->user_id)->where('type', 'logout')->first();
+        $attendance = Attendance::where('created_at', '>', today())->where('user_id', $request->user_id)->where('type', 'logout')->first();
         if (!$attendance) {
             $attendance = new Attendance();
         } else {
-            session()->flash('alert', 'You have already logged out today');
-            return redirect()->route('attendance.individual', ['employeeId' => $request->user_id]);
+            session()->flash('alert', 'You have already OUT today');
+            return redirect()->route('employee.individual', ['employeeId' => $request->user_id]);
         }
         $attendance->type = 'logout';
         $attendance->user_id = $request->user_id;
         $attendance->save();
-        return redirect()->route('attendance.individual', ['employeeId' => $request->user_id]);
+        session()->flash('success', 'You are OUT for today successfully !!!');
+        return redirect()->route('employee.individual', ['employeeId' => $request->user_id]);
     }
 
     /*
@@ -67,7 +69,7 @@ class AttendanceController extends Controller
     public function showLeavePage(Request $request, $id)
     {
         $employee = User::findOrFail($id);
-        return view('attendance.leave', compact('employee'));
+        return view('employee.leave', compact('employee'));
     }
     // SubmitLeave
     public function submitLeave(Request $request)
@@ -76,7 +78,8 @@ class AttendanceController extends Controller
         $attendance->type = 'leave';
         $attendance->user_id = $request->user_id;
         $attendance->save();
-        return redirect()->route('attendance.individual', ['employeeId' => $request->user_id]);
+        session()->flash('success', 'You are on Leave for today successfully !!!');
+        return redirect()->route('employee.individual', ['employeeId' => $request->user_id]);
     }
 
     /*
@@ -88,7 +91,6 @@ class AttendanceController extends Controller
         // Get all users with the 'employee' role
         $employees = User::where('role', 'employee')->get();
         $rows = [];
-
         foreach ($employees as $employee) {
             $row = new \stdClass();
             $row->name = $employee->name;
@@ -138,52 +140,59 @@ class AttendanceController extends Controller
         foreach ($employees as $employee) {
             $row = new \stdClass();
             $row->name = $employee->name;
-            $row->onLeave = (bool) Attendance::where('user_id', $employee->id)
+
+            // Initialize 'onLeave' and 'absent' properties
+            $row->onLeave = false;
+            $row->absent = false;
+
+            // Check if the employee is on leave for the selected date
+            $onLeave = Attendance::where('user_id', $employee->id)
                 ->where('type', 'leave')
                 ->whereDate('created_at', $selectedDate)
                 ->first();
 
-            // Fetch login record for the selected date
-            $login = Attendance::where('user_id', $employee->id)
-                ->where('type', 'login')
-                ->whereDate('created_at', $selectedDate)
-                ->first();
-    
-    
-                // Initialize default values
-                $row->login_time = null;
-                $row->logout_time = null;
-                $row->working_time = null;
-    
-                if (!$row->onLeave) {
-                    $login = Attendance::where('user_id', $employee->id)->where('type', 'login')->where('created_at', '>', today())->first();
-    
-                    if ($login) {
-                        $row->absent = false;
-                        $row->login_time = Carbon::parse($login->created_at)->setTimezone('Asia/Dhaka')->format('h:i:s');
-                        $row->date_time = Carbon::parse($login->created_at)->setTimezone('Asia/Dhaka')->format('d/m/Y');
-    
-                        $logout = Attendance::where('user_id', $employee->id)->where('type', 'logout')->where('created_at', '>', today())->first();
-    
-                        if ($logout) {
-                            $row->logout_time = Carbon::parse($logout->created_at)->setTimezone('Asia/Dhaka')->format('h:i:s');
-                            $row->working_time = Carbon::parse($logout->created_at)->longAbsoluteDiffForHumans(Carbon::parse($login->created_at));
-                            $row->date_time = Carbon::parse($login->created_at)->setTimezone('Asia/Dhaka')->format('d/m/Y');
-                        } else {
-                            $row->logout_time = null;
-                        }
+            // Initialize default values
+            $row->login_time = null;
+            $row->logout_time = null;
+            $row->working_time = null;
+
+            if ($onLeave) {
+                $row->onLeave = true;
+            } else {
+                // Fetch login record for the selected date
+                $login = Attendance::where('user_id', $employee->id)
+                    ->where('type', 'login')
+                    ->whereDate('created_at', $selectedDate)
+                    ->first();
+
+                if ($login) {
+                    $row->login_time = Carbon::parse($login->created_at)->setTimezone('Asia/Dhaka')->format('h:i:s');
+                    $row->date_time = Carbon::parse($login->created_at)->setTimezone('Asia/Dhaka')->format('d/m/Y');
+
+                    $logout = Attendance::where('user_id', $employee->id)
+                        ->where('type', 'logout')
+                        ->whereDate('created_at', $selectedDate)
+                        ->first();
+
+                    if ($logout) {
+                        $row->logout_time = Carbon::parse($logout->created_at)->setTimezone('Asia/Dhaka')->format('h:i:s');
+                        
+                        $workingTime = Carbon::parse($logout->created_at)->diff(Carbon::parse($login->created_at));
+                        $hours = $workingTime->h;
+                        $minutes = $workingTime->i;
+                        $seconds = $workingTime->s;
+                        $row->working_time = ($hours > 0 ? $hours . ' hours ' : '') . ($minutes > 0 ? $minutes . ' minutes ' : '') . ($seconds > 0 ? $seconds . ' seconds ' : '');
                     } else {
-                        $row->absent = true;
-                        $row->login_time = null;
-                        $row->date_time = null;
                         $row->logout_time = null;
                     }
                 } else {
-                    $row->absent = false;
+                    $row->absent = true;
                     $row->login_time = null;
-                    $row->logout_time = null;
                     $row->date_time = null;
+                    $row->logout_time = null;
                 }
+            }
+
             // Group records by date (format as 'd-m-Y')
             $date = $selectedDate->format('d-m-Y');
             $attendanceData[$date][] = $row;
@@ -259,6 +268,20 @@ class AttendanceController extends Controller
             }
         }
 
-        return view('attendance.individual', compact('employee', 'row'));
+        return view('employee.individual', compact('employee', 'row'));
     }
+            
+/*
+    Checking Employee-profile (Admin Panel)
+*/
+
+public function checkEmployee(Request $request){
+    $employees = User::all();
+    return view('admin-dashboard.employee-profile.index',compact('employees'));
+}
+
+/*
+    End Checking Employee-profile (Admin Panel)
+*/
+
 }
